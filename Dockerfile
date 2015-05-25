@@ -1,20 +1,17 @@
 FROM ubuntu:trusty
 MAINTAINER Michele Bertasi
 
-ENV RUST_VERSION=1.0.0
-
-# install prerequisite
+# install prerequisites
 RUN apt-get update                                                                                  && \
-    apt-get install -y --no-install-recommends wget git zlib1g-dev bison flex ncurses-dev           && \
+    apt-get install -y --no-install-recommends wget git                                             && \
 # add apt sources
-    sh -c 'echo "deb http://llvm.org/apt/trusty/ llvm-toolchain-trusty-3.4 main"                       \
-        >> /etc/apt/sources.list.d/llvm.list'
-    sh -c 'echo "deb-src http://llvm.org/apt/trusty/ llvm-toolchain-trusty-3.4 main"                   \
-        >> /etc/apt/sources.list.d/llvm.list'                                                       && \
+    sh -c 'echo "deb http://llvm.org/apt/trusty/ llvm-toolchain-trusty-3.4 main" >> /etc/apt/sources.list.d/llvm.list'      && \
+    sh -c 'echo "deb-src http://llvm.org/apt/trusty/ llvm-toolchain-trusty-3.4 main" >> /etc/apt/sources.list.d/llvm.list'  && \
     wget -O - http://llvm.org/apt/llvm-snapshot.gpg.key|sudo apt-key add -                          && \
 # install packages
     apt-get update                                                                                  && \
-    apt-get install gcc-4.8 g++-4.8 libcap-dev cmake clang-3.4 llvm-3.4-tools                       && \
+    apt-get install -y gcc-4.8 g++-4.8 cmake clang-3.4 llvm-3.4-tools  libcap-dev zlib1g-dev bison     \
+        flex ncurses-dev                                                                            && \
     update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-4.8 20                              && \
     update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-4.8 20                              && \
     update-alternatives --install /usr/bin/clang clang /usr/bin/clang-3.4 20                        && \
