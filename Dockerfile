@@ -40,7 +40,7 @@ RUN apt-get update                                                              
     ./configure --with-llvmsrc=/usr/lib/llvm-3.4/build                                                 \
                 --with-llvmobj=/usr/lib/llvm-3.4/build                                                 \
                 --with-llvmcc=/usr/bin/clang-3.4                                                       \
-                --with-llvmcxx=/usr/bin/clangxx-3.4                                                    \
+                --with-llvmcxx=/usr/bin/clang++-3.4                                                    \
                 --with-stp=/tmp/stp/build                                                              \
                 --with-uclibc=/tmp/klee-uclibc                                                      && \
     make DISABLE_ASSERTIONS=1 ENABLE_OPTIMIZED=1 ENABLE_SHARED=0 install                            && \
