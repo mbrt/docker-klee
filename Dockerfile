@@ -44,10 +44,17 @@ RUN apt-get update                                                              
                 --with-stp=/tmp/stp/build                                                              \
                 --with-uclibc=/tmp/klee-uclibc                                                      && \
     make DISABLE_ASSERTIONS=1 ENABLE_OPTIMIZED=1 ENABLE_SHARED=0 install                            && \
+# add dev user
+    adduser dev --disabled-password --gecos ""                                                      && \
+    echo "ALL            ALL = (ALL) NOPASSWD: ALL" >> /etc/sudoers                                 && \
+    chown -R dev:dev /home/dev /source                                                              && \
 # cleanup
     apt-get remove --purge -y wget git cmake bison flex                                             && \
     apt-get autoclean && apt-get clean                                                              && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
+USER dev
+ENV HOME=/home/dev
 
 VOLUME ["/work"]
 WORKDIR /work
