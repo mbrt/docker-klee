@@ -47,7 +47,7 @@ RUN apt-get update                                                              
 # add dev user
     adduser dev --disabled-password --gecos ""                                                      && \
     echo "ALL            ALL = (ALL) NOPASSWD: ALL" >> /etc/sudoers                                 && \
-    chown -R dev:dev /home/dev /source                                                              && \
+    chown -R dev:dev /home/dev                                                                      && \
 # cleanup
     apt-get remove --purge -y wget git cmake bison flex                                             && \
     apt-get autoclean && apt-get clean                                                              && \
