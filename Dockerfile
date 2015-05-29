@@ -45,7 +45,7 @@ RUN apt-get update                                                              
                 --with-uclibc=/tmp/klee-uclibc                                                      && \
     make DISABLE_ASSERTIONS=1 ENABLE_OPTIMIZED=1 ENABLE_SHARED=0 install                            && \
 # add dev user
-    mkdir /work
+    mkdir /work                                                                                     && \
     adduser dev --disabled-password --gecos ""                                                      && \
     echo "ALL            ALL = (ALL) NOPASSWD: ALL" >> /etc/sudoers                                 && \
     chown -R dev:dev /home/dev /work                                                                && \
