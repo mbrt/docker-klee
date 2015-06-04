@@ -3,7 +3,7 @@ MAINTAINER Michele Bertasi
 
 # install prerequisites
 RUN apt-get update                                                                                  && \
-    apt-get install -y --no-install-recommends wget git                                             && \
+    apt-get install -y --no-install-recommends wget git python-pip                                  && \
 # add apt sources
     sh -c 'echo "deb http://llvm.org/apt/trusty/ llvm-toolchain-trusty-3.4 main" >> /etc/apt/sources.list.d/llvm.list'      && \
     sh -c 'echo "deb-src http://llvm.org/apt/trusty/ llvm-toolchain-trusty-3.4 main" >> /etc/apt/sources.list.d/llvm.list'  && \
@@ -16,6 +16,7 @@ RUN apt-get update                                                              
     update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-4.8 20                              && \
     update-alternatives --install /usr/bin/clang clang /usr/bin/clang-3.4 20                        && \
     update-alternatives --install /usr/bin/clang++ clang++ /usr/bin/clang++-3.4 20                  && \
+    pip install tabulate                                                                            && \
 # build STP
     cd /tmp && mkdir stp && cd stp                                                                  && \
     git clone https://github.com/stp/minisat                                                        && \
@@ -50,7 +51,7 @@ RUN apt-get update                                                              
     echo "ALL            ALL = (ALL) NOPASSWD: ALL" >> /etc/sudoers                                 && \
     chown -R dev:dev /home/dev /work                                                                && \
 # cleanup
-    apt-get remove --purge -y wget git cmake bison flex                                             && \
+    apt-get remove --purge -y wget git cmake bison flex python-pip                                  && \
     apt-get autoclean && apt-get clean                                                              && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
