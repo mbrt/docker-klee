@@ -23,13 +23,13 @@ RUN apt-get update                                                              
     cd minisat && mkdir build && cd build && MINISAT_DIR=`pwd`                                      && \
     cmake -DCMAKE_INSTALL_PREFIX=/usr .. && make && make install                                    && \
     cd ../../                                                                                       && \
-    git clone --depth 1 git://github.com/stp/stp.git src                                            && \
+    git clone --depth 1 https://github.com/stp/stp.git src                                          && \
     mkdir build && cd build                                                                         && \
     cmake -DBUILD_SHARED_LIBS:BOOL=OFF -DENABLE_PYTHON_INTERFACE:BOOL=OFF -DNO_BOOST:BOOL=ON ../src && \
     make                                                                                            && \
 # build uclibc
     cd /tmp                                                                                         && \
-    git clone --depth 1 git://github.com/klee/klee-uclibc.git                                       && \
+    git clone --depth 1 https://github.com/klee/klee-uclibc.git                                     && \
     cd klee-uclibc                                                                                  && \
     ./configure --make-llvm-lib --with-cc /usr/bin/clang-3.4                                           \
                 --with-llvm-config /usr/bin/llvm-config-3.4                                         && \
